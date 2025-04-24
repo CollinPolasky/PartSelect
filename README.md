@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# PartSelect AI Agent
+PartSelect AI Agent is an conversational system designed to assist users with questions about appliance parts, repair guidance, and company policies. The agent uses RAG (Retrieval-Augmented Generation) functions with Pinecone integration to provide accurate, context-aware responses for product, repair, and policy queries.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Highlights
+- Smart parts identification product details such as pricing and availability
+- Access to comprehensive repair documentation and embedded video guides
+- Context-aware conversation handling and memory
+- Intelligent RAG retrieval system for accurate responses
+- Easy access to company policy information such as return policies and estimated delivery dates
 
-## Available Scripts
 
-In the project directory, you can run:
+## System Architecture/Design
+![Architecture](https://github.com/user-attachments/assets/9f2cd0b4-d68a-4397-82de-de1fe41b7f90)
 
-### `npm start`
+This flowchart shows the system's architecture including:
+- Multi-layered content filters and response validators
+- Retrieval process using RAG from three seperate sources (Parts, Repair, and Policy)
+- Chat loop flow from query processing and filtering to response generation and validation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# Interface Demo
+![PartSelectDemoScreenshotStart](https://github.com/user-attachments/assets/a9a7b120-0cd7-4e6b-b9c7-3fe613a88e20)
 
-### `npm test`
+![PartSelectDemoScreenshot](https://github.com/user-attachments/assets/bbd9602e-39c9-4b55-a4eb-a93e81d8f2a9)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Installation
+Install the required packages:
+pip install -r backend\requirements.txt
+npm install
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Environment Variables
+Create a .env file in the backend directory with the following variables:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- DEEPSEEK_API_KEY=your deepseek api key
+- PINECONE_API_KEY=your pinecone api key
+- PINECONE_ENVIRONMENT=your pinecone environment/region
 
-### `npm run eject`
+Replace "your api key" with your actual API keys.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Note: Make sure to keep your .env file private and never commit it to version control.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Data
+The following files and functions are provided should you wish to replicate the databases for RAG features (in pinecone or otherwise)
+- all_parts.csv -> vectorize.py
+- repairs.csv -> vectorize_repairs.py
+- support_info.json -> vectorize_support.py
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Starting the Web Interface
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+To start the web interface:
 
-## Learn More
+npm start
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Navigate to the backend directory:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+cd backend
 
-### Code Splitting
+Start the server with hot reloading enabled:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+uvicorn main:app --reload
 
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Open your web browser and navigate to http://localhost:8000 to access the web interface.
